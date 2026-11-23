@@ -1,0 +1,24 @@
+# LaTeX build products
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/*.toc
+paper/*.lof
+paper/*.lot
+paper/*.spl
+paper/*.pdf
+!paper/main.pdf
+# template files (licence: download from Automatica/IFAC)
+paper/autart.cls
+paper/autart.bst
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+code/results/
+.venv/
