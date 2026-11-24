@@ -1,0 +1,133 @@
+\section{Gyroscopic virtual mechanical system}\label{sec:model}
+
+\subsection{Nominal interconnection}
+The host is a normalised undamped oscillator with displacement $q$; an impulse
+sets $(q,\dot q)(0)=(0,v_0)$.
+The virtual oscillator, with state $(z,\dot z)$, lives in software.
+The nominal interconnection is
+\begin{equation}\label{eq:nominal}
+  \ddot q - n\dot z + q = 0,\qquad \ddot z + n\dot q + z = 0,
+\end{equation}
+with gyroscopic coupling $n>0$.
+The force $n\dot z$ is applied to the host by an actuator; the input $-n\dot q$ to
+the virtual oscillator is computed from the measured host velocity.
+With $x=(q,\dot q,z,\dot z)\in\RR^4$, \eqref{eq:nominal} reads $\dot x=A_cx$, and
+the total energy $H(x)=\tfrac12|x|^2$ satisfies $\dot H=n\dot q\dot z-n\dot z\dot
+q=0$.
+The actuator injects power $n\dot q\dot z$ into the host and the virtual channel
+withdraws the same amount, so the interconnection is lossless and
+power-preserving~\citep{vanderschaft2000l2}.
+The subsystem energies are $H_q=\tfrac12(q^2+\dot q^2)$ and
+$H_z=\tfrac12(z^2+\dot z^2)$, and $\Hr:=H(x(0))=v_0^2/2$.
+
+\begin{remark}[Sign convention]
+\citet{juchem2026shaping} writes the coupling as $\ddot q+n\dot z+q=0$,
+$\ddot z-n\dot q+z=0$; the change $z\mapsto-z$ maps one convention to the other
+and leaves every statement about $(q,\dot q)$ unchanged.
+We follow~\citet{juchem2027restoring}.
+\end{remark}
+
+The characteristic polynomial of $A_c$ is $(s^2+1)^2+n^2s^2$, with roots
+$\pm\ii\Op$ and $\pm\ii\Om$, where
+\begin{equation}\label{eq:modal-freq}
+  \Opm=\tfrac12\big(\sqrt{n^2+4}\pm n\big),\quad \Op\Om=1,\quad \Op-\Om=n,
+\end{equation}
+and $S:=\Op+\Om=\sqrt{n^2+4}$.
+
+\subsection{Exact modal--polar coordinates}
+The following coordinates are the backbone of the paper.
+They are defined on all of $\RR^4$, not only along nominal trajectories.
+
+\begin{lemma}[Modal--polar coordinates]\label{lem:modal}
+Define the linear map $T:\RR^4\to\RR^4$, $x\mapsto(X_+,Y_+,X_-,Y_-)$, by
+\begin{equation}\label{eq:T}
+\begin{aligned}
+  X_+&=\tfrac{1}{S}(\dot q+\Om z), & Y_+&=\tfrac{1}{S}(\Om q-\dot z),\\
+  X_-&=\tfrac{1}{S}(\dot q-\Op z), & Y_-&=\tfrac{1}{S}(\Op q+\dot z),
+\end{aligned}
+\end{equation}
+and $\zeta_\pm:=X_\pm+\ii Y_\pm=:A_\pm e^{\ii\theta_\pm}$.
+Then:
+\begin{enumerate}
+\item $T$ is invertible, with $q=Y_++Y_-$, $\dot q=\Op X_++\Om X_-$,
+  $z=X_+-X_-$, $\dot z=-\Op Y_++\Om Y_-$.
+\item Along \eqref{eq:nominal}, $\dot\zeta_\pm=\ii\Opm\zeta_\pm$, i.e.\
+  $\dot A_\pm=0$ and $\dot\theta_\pm=\Opm$.
+\item $H=\tfrac S2\big(\Op A_+^2+\Om A_-^2\big)$.
+\item $m:=q\dot q+z\dot z = S A_+A_-\sin(\theta_++\theta_-)$.
+\item $g:=\dot q\dot z=-\tfrac12\Op^2A_+^2\sin2\theta_+
+  +\tfrac12\Om^2A_-^2\sin2\theta_- + A_+A_-\sin(\theta_--\theta_+)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Items 1 and 2 follow by direct substitution, using $\Op\Om=1$ and $S=\Op+\Om$.
+For item 3, item 1 gives $q^2+\dot z^2=(1+\Op^2)Y_+^2+(1+\Om^2)Y_-^2+2(1-\Op\Om)Y_+Y_-$
+and $1+\Op^2=\Op S$, and similarly for $\dot q^2+z^2$.
+Items 4 and 5 follow by substituting item 1 and applying product-to-sum
+identities.
+\end{proof}
+
+Item 1 with $\theta_\pm=\Opm t+\phi_\pm$ recovers the nominal modal
+representation of~\citet{juchem2027restoring}.
+The impulse response has $A_+=A_-=v_0/S$ and $\theta_\pm(0)=0$.
+The three \emph{error coordinates} used throughout are
+\begin{equation}\label{eq:errors}
+\begin{gathered}
+  \eH:=\frac{H}{\Hr}-1,\qquad \eA:=\ln\frac{A_+}{A_-},\\
+  \psi:=\sigma\theta_+-\tau\theta_-\ \ (\mathrm{mod}\ 2\pi),
+\end{gathered}
+\end{equation}
+where $\eA$ and $\psi$ are defined on $\mathcal D_0:=\{x:A_+A_->0\}$ and
+$(\tau,\sigma)$ is the design pair of \cref{sec:tuning}.
+By item 3, $(H,\eA)$ determine $(A_+,A_-)$; the energy share of the $+$ mode is
+\begin{equation}\label{eq:share}
+  a:=\frac{S\Op A_+^2}{2H}=\frac{\Op e^{2\eA}}{\Op e^{2\eA}+\Om}\in(0,1).
+\end{equation}
+
+\begin{lemma}[Perturbed modal dynamics]\label{lem:perturbed}
+Let $\ddot q=-q+n\dot z+\Delta_1$ and $\ddot z=-z-n\dot q+\Delta_2$ for arbitrary
+(possibly state-, time- or history-dependent) signals $\Delta_1,\Delta_2$.
+Then
+\begin{equation}\label{eq:pert-modal}
+  \dot\zeta_\pm=\ii\Opm\zeta_\pm+\tfrac{1}{S}\big(\Delta_1\mp\ii\Delta_2\big),
+\end{equation}
+and consequently
+\begin{align}
+  \dot H &= \dot q\,\Delta_1+\dot z\,\Delta_2, \label{eq:Hdot}\\
+  \tfrac{\dd}{\dd t}\tfrac{A_\pm^2}{2} &= \tfrac1S\big(X_\pm\Delta_1\mp Y_\pm\Delta_2\big),
+  \label{eq:Adot}\\
+  \dot\theta_\pm &= \Opm\mp\tfrac{1}{SA_\pm^2}\big(X_\pm\Delta_2\pm Y_\pm\Delta_1\big).
+  \label{eq:thdot}
+\end{align}
+\end{lemma}
+\begin{proof}
+Differentiate \eqref{eq:T}: $\dot X_\pm$ gains $\Delta_1/S$, $\dot Y_+$ gains
+$-\Delta_2/S$ and $\dot Y_-$ gains $+\Delta_2/S$; the nominal part is item 2 of
+\cref{lem:modal}.
+Then \eqref{eq:Adot}--\eqref{eq:thdot} follow from
+$\tfrac{\dd}{\dd t}|\zeta|^2=2\Real(\bar\zeta\dot\zeta)$ and
+$\dot\theta=\Imag(\bar\zeta\dot\zeta)/|\zeta|^2$, and \eqref{eq:Hdot} from
+item 3 of \cref{lem:modal} (or directly from $H=\tfrac12|x|^2$).
+\end{proof}
+
+\Cref{lem:perturbed} is exact and needs no averaging.
+Every imperfection in \cref{sec:mismatch} and every control action in
+\cref{sec:control} enters through $(\Delta_1,\Delta_2)$, and
+\eqref{eq:Hdot}--\eqref{eq:thdot} show directly how it affects energy, amplitudes
+and phases.
+For example, a common coupling change $c$ ($\Delta_1=c\dot z$,
+$\Delta_2=-c\dot q$) gives $\dot H=0$ and
+\begin{equation}\label{eq:common-amp}
+  \dot A_+=\tfrac{c}{S}\Om A_-\sin\varphi,\qquad
+  \dot A_-=-\tfrac{c}{S}\Op A_+\sin\varphi,
+\end{equation}
+with $\varphi:=\theta_++\theta_-$.
+
+\begin{remark}[Corrections to the conference version]\label{rem:ecc-fix}
+The second identity in \eqref{eq:common-amp} carries a minus sign; it is
+required by $\dot H=0$ (\cref{lem:modal}, item 3).
+In~\citet[eq.~(48)]{juchem2027restoring} both amplitude rates were printed with
+the same sign, although the derived quantity $B_A$ in their eq.~(50) is correct.
+Likewise, $A_+=A_-$ with $H=\Hr$ gives $A_\pm=\sqrt{2\Hr}/S$, not
+$\sqrt{2\Hr/S}$ as printed in~\citet[eq.~(52)]{juchem2027restoring}.
+\end{remark}

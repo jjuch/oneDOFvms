@@ -1,0 +1,40 @@
+\begin{abstract}
+A gyroscopic virtual mechanical system couples an undamped host oscillator to a
+software oscillator through a skew-symmetric velocity interconnection.
+For a coprime modal ratio $(\tau,\sigma)$ the closed loop evolves on closed
+Lissajous orbits along which host energy can be transferred completely to the
+controller.
+This paper gives a complete account of the design, the failure, and the
+restoration of this mechanism.
+Exact modal--polar coordinates reduce the geometry to three quantities: total
+energy, a modal amplitude ratio, and a coprime relative phase
+$\psi=\sigma\theta_+-\tau\theta_-$.
+In these coordinates, complete host absorption occurs if and only if the
+amplitude ratio lies in an explicit band and the relative phase belongs to an
+explicit finite set.
+For equal amplitudes this set is $\psi\equiv(\tau+\sigma)(2j+1)\pi/2$.
+The known condition $\tau-\sigma\equiv 2\pmod 4$ is exactly the case where the
+impulse response satisfies it, and every resonant pair is absorbing at the
+right phase.
+We then show that the realised loop is fragile: for every positive loop delay the
+interconnection is exponentially unstable, with a closed-form count of unstable
+characteristic roots, the fast mode being destabilised and the slow mode damped;
+a zero-order hold acts, to first order, as an additional loop delay of one
+sampling period.
+Retuning the virtual stiffness, as proposed earlier, can only compensate a
+relative increase of the coupling of at most $n^2/8$, whereas a trim of the
+common coupling has $O(1)$ authority.
+A three-channel controller regulates energy, balances the modal amplitudes with
+integral action, and locks the relative phase through the common coupling.
+Its first-order averaged dynamics are triangular and input-to-state stable, and
+semiglobal practical input-to-state stability of the sampled closed loop follows
+by averaging.
+Simulations with delay, sampling, gain errors, noise and backlash recover closed
+orbits and per-cycle host depletion to $10^{-5}$ of the initial energy.
+\end{abstract}
+
+\begin{keyword}
+Energy-based control; gyroscopic interconnection; vibration absorption;
+time delay; sampled-data systems; averaging; input-to-state stability;
+phase locking.
+\end{keyword}

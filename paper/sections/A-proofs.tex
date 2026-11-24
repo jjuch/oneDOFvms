@@ -1,0 +1,203 @@
+\section{Proofs}\label{app:proofs}
+
+\subsection{Proof of \cref{thm:absorption}}\label{app:absorption}
+By \cref{lem:modal}(1), along the nominal flow
+$(q,\dot q)=A_+(\sin\theta_+,\Op\cos\theta_+)+A_-(\sin\theta_-,\Om\cos\theta_-)$.
+The two terms run on the centred coaxial ellipses $E_+$ and $E_-$ with semi-axes
+$(A_+,\Op A_+)$ and $(A_-,\Om A_-)$.
+Since $E_\pm=-E_\pm$, the host origin is reached iff some point of the orbit has
+$A_-(\sin\theta_-,\Om\cos\theta_-)=-A_+(\sin\theta_+,\Op\cos\theta_+)$.
+This requires $E_+\cap E_-\neq\emptyset$.
+
+\emph{Necessity of (i).}
+If $A_+>A_-$ and $\Op A_+>\Om A_-$, then $E_-$ lies strictly inside $E_+$.
+If $A_+<A_-$ and $\Op A_+<\Om A_-$, then $E_+$ lies strictly inside $E_-$.
+The remaining case $A_+\ge A_-$, $\Op A_+\le\Om A_-$ would need
+$r=\Op/\Om\le\rho\le1$, which contradicts $r>1$.
+Hence $1\le\rho\le r$.
+
+\emph{Intersection points.}
+Dividing by $A_+$ gives $\rho\sin\vartheta_-=-\sin\vartheta_+$ and
+$\rho\cos\vartheta_-=-r\cos\vartheta_+$.
+Squaring and adding gives $\rho^2=\sin^2\vartheta_++r^2\cos^2\vartheta_+$, i.e.\
+$\cos^2\vartheta_+=(\rho^2-1)/(r^2-1)\in[0,1]$ exactly when (i) holds.
+Each admissible $\vartheta_+$ (at most four) determines $\vartheta_-$ uniquely.
+
+\emph{Orbit membership.}
+For a resonant pair the nominal flow on the torus $\mathbb T^2\ni(\theta_+,\theta_-)$
+is $\theta_\pm(t)=\theta_\pm(0)+\Opm t$, with $\Op/\Om=\tau/\sigma$.
+The map $\mathbb T^2\to\mathbb S^1$, $(\theta_+,\theta_-)\mapsto\sigma\theta_+-\tau\theta_-$
+has connected fibres because $\gcd(\tau,\sigma)=1$.
+Each fibre is therefore a single closed orbit, and the orbit with relative phase
+$\psi$ visits $(\vartheta_+,\vartheta_-)$ iff
+$\sigma\vartheta_+-\tau\vartheta_-\equiv\psi$.
+This is (ii).
+
+\emph{Equal amplitudes.}
+For $\rho=1$: $\cos\vartheta_+=0$, so $\vartheta_+=\pi/2+j\pi$, and then
+$\sin\vartheta_-=-\sin\vartheta_+$, $\cos\vartheta_-=0$, i.e.\
+$\vartheta_-=-\vartheta_+$.
+Hence $\psi=(\tau+\sigma)\vartheta_+=(\tau+\sigma)(2j+1)\pi/2$.
+Increasing $j$ by one adds $(\tau+\sigma)\pi$, which is $0$ or $\pi$ modulo
+$2\pi$ depending on the parity of $\tau+\sigma$.
+\hfill$\square$
+
+\subsection{Proof of \cref{thm:delay}}\label{app:delay}
+Write $h=d/2$ and $F(s;h):=F_+(s;2h)=s^2+1-\ii ns\,e^{-sh}$.
+Since $F_-(s;d)=\overline{F_+(\bar s;d)}$, the roots of $F_-$ are the conjugates
+of those of $F_+$, and it suffices to count the roots of $F$ in $\Real s>0$; call
+this number $N_+(h)$.
+$F$ is retarded, so its roots depend continuously on $h$.
+For $h>0$, the roots that appear as $h$ leaves $0$ come in from
+$\Real s=-\infty$, and $N_+$ can change only when a root crosses
+$\ii\RR$~\citep{cooke1986zeroes,michiels2014stability}.
+
+\emph{Start.} At $h=0$ the roots are $\ii\Op$ and $-\ii\Om$.
+Implicit differentiation gives $\frac{\dd s}{\dd h}=-\frac{\ii ns^2}{2s-\ii n}$ at
+$h=0$.
+At $s=\ii\Op$ this equals $n\Op^2/S$, and at $s=-\ii\Om$ it equals $-n\Om^2/S$,
+because $2\Op-n=2\Om+n=S$.
+This proves (d) and gives $N_+(0^+)=1$.
+
+\emph{Crossings.} $F(0;h)=1$, so let $s=\ii\omega$ with $\omega\neq0$.
+Then $F=0$ iff $n\omega e^{-\ii\omega h}=\omega^2-1$.
+The left-hand side has modulus $n|\omega|$ and the right-hand side is real, so
+$|\omega^2-1|=n|\omega|$, i.e.\ $|\omega|\in\{\Op,\Om\}$ by \eqref{eq:modal-freq},
+and $e^{-\ii\omega h}=(\omega^2-1)/(n\omega)=\pm1$.
+Using $\Op^2-1=n\Op$ and $1-\Om^2=n\Om$, the crossings are
+\begin{itemize}
+\item at $\ii\Op$ for $h\in\frac{2\pi}{\Op}\NN_0$ and at $-\ii\Op$ for
+  $h\in\frac{\pi}{\Op}(2\NN_0+1)$, i.e.\ at $\pm\ii\Op$ for $h\in\frac{\pi}{\Op}\NN_0$;
+\item at $-\ii\Om$ for $h\in\frac{2\pi}{\Om}\NN_0$ and at $\ii\Om$ for
+  $h\in\frac{\pi}{\Om}(2\NN_0+1)$, i.e.\ at $\pm\ii\Om$ for $h\in\frac{\pi}{\Om}\NN_0$.
+\end{itemize}
+With $d=2h$ this proves (a).
+
+\emph{Direction.} At a crossing, $\ii ns\,e^{-sh}=s^2+1$, hence
+$\partial_hF=s(s^2+1)$ and $\partial_sF=2s-(s^2+1)/s+h(s^2+1)$.
+With $s=\ii\omega$ and $\kappa:=1-\omega^2\neq0$,
+\begin{align*}
+  \frac{\dd s}{\dd h}&=-\frac{\partial_hF}{\partial_sF}
+  =\frac{-\ii\omega\kappa}{h\kappa+\ii(\omega^2+1)/\omega},\\
+  \Real\frac{\dd s}{\dd h}&=\frac{-\kappa(\omega^2+1)}{|h\kappa+\ii(\omega^2+1)/\omega|^2}.
+\end{align*}
+Thus $\operatorname{sign}\Real\frac{\dd s}{\dd h}=\operatorname{sign}(\omega^2-1)$.
+Crossings at $\pm\ii\Op$ ($\Op>1$) move to the right and crossings at
+$\pm\ii\Om$ ($\Om<1$) move to the left.
+Since $\Imag\partial_sF=(\omega^2+1)/\omega\neq0$, the crossing roots are
+simple.
+This proves (b).
+
+\emph{Count.} For $h$ not a crossing value,
+$N_+(h)=1+\#\{m\in\NN:m\pi/\Op<h\}-\#\{m\in\NN:m\pi/\Om<h\}
+=1+\lfloor h\Op/\pi\rfloor-\lfloor h\Om/\pi\rfloor$.
+Then $N=2N_+$, and $h=d/2$ gives \eqref{eq:Nd}.
+Since $\Op>\Om$, $N\ge2$.
+At a crossing delay the roots already in the open right half-plane remain there,
+so instability holds for all $d>0$.
+\hfill$\square$
+
+\subsection{Proof of \cref{lem:averaged}}\label{app:averaged}
+All averages are taken over the resonant orbit (period $P_0$) at fixed slow
+variables.
+By the argument in the proof of \cref{lem:pe}, a harmonic
+$e^{\ii(k\theta_++l\theta_-)}$ with $1\le|k|+|l|\le4$ has zero average when
+$\tau+\sigma\ge5$.
+Every product below is of this order.
+Multiplicative static errors in $\hat g$ and $\hat m$ are absorbed into $K_E$
+and $K_A$.
+
+\emph{Energy.}
+By \eqref{eq:Hdot} and \eqref{eq:realised}, $\dot H=2(w+\eta_w)g+(\text{delay terms})$;
+$s$ and $c_\psi$ do not contribute.
+\Cref{prop:static} gives $\avg{\eta_wg}=0$, and \eqref{eq:H-delay} gives the
+delay term.
+With \eqref{eq:u}, $\avg{2wg}=-2K_E\Hr(\eH+\delta_H)\avg{g^2}/H^2
+=-2K_E\Hr\nu(a)(\eH+\delta_H)$ by \cref{lem:pe}.
+Dividing by $\Hr$ and using $H/\Hr=1+\eH$ gives \eqref{eq:avg-H}.
+
+\emph{Amplitude.}
+From the proof of \cref{prop:ideal}(b), the common action contributes
+$\dot\eA=2Hs\sin\varphi/(S^2A_+A_-)$; with \eqref{eq:s} and
+$\avg{\sin^2\varphi}=\tfrac12$ this averages to $-\tfrac{K_A}{S}(\eA+\zeta_A+\delta_A)$.
+The trim $c_\psi$ enters through \eqref{eq:common-amp} as well, but it is constant
+on the orbit and $\avg{\sin\varphi}=0$.
+For the antisymmetric action, $\Delta_1=w\dot z$ and $\Delta_2=w\dot q$ in
+\eqref{eq:Adot}.
+With \cref{lem:modal},
+\begin{align*}
+  X_+\dot z-Y_+\dot q&=A_+\big(-\Op A_+\sin2\theta_+\\
+     &\qquad\quad+\Om A_-\sin(\theta_--\theta_+)\big),\\
+  X_-\dot z+Y_-\dot q&=A_-\big(\Om A_-\sin2\theta_-\\
+     &\qquad\quad+\Op A_+\sin(\theta_--\theta_+)\big).
+\end{align*}
+Multiplying by $g$ from \cref{lem:modal}(5) and averaging,
+\begin{align*}
+  \avg{g(X_+\dot z-Y_+\dot q)}&=A_+^2\big(\tfrac14\Op^3A_+^2+\tfrac12\Om A_-^2\big),\\
+  \avg{g(X_-\dot z+Y_-\dot q)}&=A_-^2\big(\tfrac14\Om^3A_-^2+\tfrac12\Op A_+^2\big).
+\end{align*}
+With $w=-k\,g$, $k=K_E\Hr(\eH+\delta_H)/H^2$, this gives
+$\avg{\dot\eA}_w=-\tfrac{k}{S}\big[A_+^2(\tfrac14\Op^3-\tfrac12\Op)-A_-^2(\tfrac14\Om^3-\tfrac12\Om)\big]
+=-\tfrac{2kH}{S^2}\chi(a)$.
+This is the middle term of \eqref{eq:avg-A}.
+As a check, the same averages reproduce \eqref{eq:avg-H} through
+$\dot H=S(\Op A_+\dot A_++\Om A_-\dot A_-)$.
+The delay contributes $\alpha_\Sigma$ (\cref{cor:delay-modal}), and static
+mismatch contributes nothing (\cref{prop:static}).
+Equation \eqref{eq:avg-zeta} is the integrator with $\hat e_A=\eA+\delta_A$.
+
+\emph{Phase.}
+By \eqref{eq:thdot}, a constant common coupling $c$ contributes
+$\dot\theta_\pm-\Opm=\pm\tfrac{c}{S}\big(\Opm+\Omega_\mp\tfrac{A_\mp}{A_\pm}\cos\varphi\big)$,
+which averages to $\pm c\Opm/S$.
+For $c=s$, which is proportional to $\sin\varphi$, the average vanishes.
+For $w\propto g$ the products with \eqref{eq:thdot} are again non-resonant and
+average to zero.
+The first-order frequency shift due to delay vanishes because $\frac{\dd s}{\dd
+h}$ is real at $h=0$ (\cref{app:delay}).
+Hence $\avg{\dot\psi}=\beta_\psi(c_\psi+\eta_c)$ by \cref{prop:static}, and
+\eqref{eq:cpsi} gives \eqref{eq:avg-psi}--\eqref{eq:avg-xi}.
+\hfill$\square$
+
+\subsection{Proof of \cref{thm:iss-avg}}\label{app:iss}
+\emph{(a)} Rewrite \eqref{eq:avg-H} as
+$\dot\eH=-(2K_E\nu-\omega_H)\eH-2K_E\nu\delta_H+\omega_H$.
+By \cref{lem:pe}, $2K_E\nu-\omega_H\ge\lambda_H$, so
+$D^+|\eH|\le-\lambda_H|\eH|+2K_E\nu_{\max}|\delta_H|+\bar\omega_H$.
+The comparison lemma gives \eqref{eq:iss-H}.
+On the boundary $\eH=-1+h_0$,
+$\dot\eH\ge2K_E\nu_{\min}(1-h_0-|\delta_H|)-\bar\omega_Hh_0
+\ge h_0(2K_E\nu_{\min}-\bar\omega_H)>0$ whenever $|\delta_H|\le1-2h_0$.
+Hence $\mathcal E_{h_0}$ is forward invariant.
+
+\emph{(b)} With $\tilde\zeta_A=\zeta_A-S\alpha_\Sigma/K_A$,
+\[
+  \tfrac{\dd}{\dd t}\begin{bmatrix}\eA\\\tilde\zeta_A\end{bmatrix}
+  =M\begin{bmatrix}\eA\\\tilde\zeta_A\end{bmatrix}+\begin{bmatrix}p_1\\p_2\end{bmatrix},\quad
+  M=\begin{bmatrix}-K_A/S&-K_A/S\\k_{IA}&0\end{bmatrix},
+\]
+with $p_1=-\tfrac{K_A}{S}\delta_A-\tfrac{2K_E}{S^2}\chi(a)\tfrac{\eH+\delta_H}{1+\eH}$
+and $p_2=k_{IA}\delta_A-\tfrac{S}{K_A}\dot\alpha_\Sigma$.
+$M$ is Hurwitz, since its trace is $-K_A/S<0$ and its determinant is
+$K_Ak_{IA}/S>0$.
+On $\mathcal E_{h_0}$,
+$|p_1|\le\tfrac{K_A}{S}|\delta_A|+\tfrac{2K_E\bar\chi}{S^2h_0}|\eH+\delta_H|$.
+This bound does not depend on the state, although $\chi(a)$ does depend on $\eA$.
+Variation of constants therefore gives an ISS estimate with linear gains.
+The cascade with (a) is ISS~\citep{sontag1989smooth,sontag2008input}.
+For constant inputs, $\dot\zeta_A=0$ forces $\eA=-\delta_A$.
+The Jacobian at this equilibrium is $M$ plus a perturbation of size
+$O(K_E|\eH^\star+\delta_H|)=O(d+|\delta_H|)$, so it is Hurwitz for small inputs.
+
+\emph{(c)} Let $e:=\psi-\psis+\delta_\psi$ and $\tilde\xi:=\xi-\beta_\psi\eta_c$.
+Then $\dot e=-k_P\sin e-\tilde\xi$ and $\dot{\tilde\xi}=k_I\sin e$.
+With $V=k_I(1-\cos e)+\tfrac12\tilde\xi^2$ we get $\dot V=-k_Pk_I\sin^2e\le0$, so
+solutions are bounded on $\mathbb S^1\times\RR$.
+By LaSalle they converge to the largest invariant set in $\{\sin e=0\}$, which is
+$\{(0,0),(\pi,0)\}$.
+The linearisation at $(0,0)$ has characteristic polynomial $\lambda^2+k_P\lambda+k_I$,
+which is Hurwitz.
+At $(\pi,0)$ it is $\lambda^2-k_P\lambda-k_I$, which gives a saddle with a
+one-dimensional stable manifold.
+Finally, $c_\psi=-(k_P\sin e+\xi)/\beta_\psi\to-\eta_c$.
+\hfill$\square$

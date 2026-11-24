@@ -1,0 +1,78 @@
+% =============================================================================
+%  Restoring resonant energy exchange in gyroscopic virtual mechanical systems
+%  Journal version (target: Automatica, regular paper)
+%
+%  Build:  latexmk -pdf main.tex      (see ../README.md)
+%  Template: Automatica uses autart.cls / autart.bst (IFAC).  These files are
+%  NOT redistributed here; download them from the Automatica "Guide for
+%  authors" (or the Overleaf "Automatica (IFAC Journal)" template) and drop
+%  them in this folder.  Without them, autart-compat.tex provides a close
+%  stand-in so the paper always compiles.
+% =============================================================================
+\IfFileExists{autart.cls}{%
+  \documentclass[twocolumn]{autart}\def\USEAUTART{1}%
+}{%
+  \documentclass[twocolumn,10pt,a4paper]{article}%
+}
+\ifdefined\USEAUTART\else\input{autart-compat}\fi
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\graphicspath{{../figures/}}
+\input{macros}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Restoring resonant energy exchange in gyroscopic virtual mechanical
+systems under delay and sampling\thanksref{footnoteinfo}}
+
+%\thanks[footnoteinfo]{This paper extends results presented at the 2026 IEEE Conference on Control Technology and Applications (CCTA) and submitted to the 2027 European Control Conference (ECC). Corresponding author J.~Juchem.}
+
+\author[ECE]{Jasper Juchem}\ead{jasper.juchem@ubc.ca},
+\author[UGent]{Sarah Geyskens}\ead{sarah.geyskens@ugent.be},
+\author[UGent]{Michiel De Roeck}\ead{michiel.deroeck@ugent.be},
+\author[CBE]{Bhushan Gopaluni}\ead{bhushan.gopaluni@ubc.ca},
+\author[ECE]{Cyrus Neary}\ead{cyrus.neary@ubc.ca},
+\author[UGent]{Mia Loccufier}\ead{mia.loccufier@ugent.be}
+
+\address[ECE]{Department of Electrical \& Computer Engineering, University of
+British Columbia, Vancouver, BC, Canada}
+\address[CBE]{Department of Chemical \& Biological Engineering, University of
+British Columbia, Vancouver, BC, Canada}
+\address[UGent]{Department of Electromechanical, Systems and Metal Engineering,
+Ghent University, Ghent, Belgium}
+
+\input{sections/00-abstract}
+
+\end{frontmatter}
+
+\input{sections/01-introduction}
+\input{sections/02-model}
+\input{sections/03-tuning}
+\input{sections/04-mismatch}
+\input{sections/05-control}
+\input{sections/06-simulations}
+\input{sections/07-conclusions}
+
+\bibliographystyle{\BIBSTYLE}
+\bibliography{refs}
+
+\appendix
+\input{sections/A-proofs}
+
+\ifdefined\SHOWGAPS
+\onecolumn
+\section*{List of open gaps (remove before submission)}
+\listofgaps
+\fi
+
+\end{document}

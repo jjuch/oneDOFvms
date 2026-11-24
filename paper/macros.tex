@@ -1,0 +1,58 @@
+% =============================================================================
+%  macros.tex -- notation and draft tooling.
+%  NOTE (Automatica): the author guide asks authors not to define their own
+%  macros in the final source.  Before final submission run, e.g.,
+%  `de-macro` or expand these by hand.  Keep this list short.
+% =============================================================================
+\ifdefined\USEAUTART\def\BIBSTYLE{autart}\fi
+
+% ---------- theorem-like environments (only if the class has none) ----------
+\makeatletter
+\@ifundefined{theorem}{\newtheorem{theorem}{Theorem}}{}
+\@ifundefined{lemma}{\newtheorem{lemma}{Lemma}}{}
+\@ifundefined{proposition}{\newtheorem{proposition}{Proposition}}{}
+\@ifundefined{corollary}{\newtheorem{corollary}{Corollary}}{}
+\@ifundefined{assumption}{\newtheorem{assumption}{Assumption}}{}
+\@ifundefined{definition}{\newtheorem{definition}{Definition}}{}
+\@ifundefined{remark}{\newtheorem{remark}{Remark}}{}
+\@ifundefined{proof}{\newenvironment{proof}[1][Proof]{\par\noindent\textit{#1.}\ }{\hfill$\square$\par\medskip}}{}
+\makeatother
+\crefname{assumption}{Assumption}{Assumptions}
+\crefname{gapitem}{Gap}{Gaps}
+
+% ---------- notation ----------
+\newcommand{\Op}{\Omega_+}
+\newcommand{\Om}{\Omega_-}
+\newcommand{\Opm}{\Omega_\pm}
+\newcommand{\Hr}{H_r}
+\newcommand{\eH}{e_H}
+\newcommand{\eA}{e_A}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\avg}[1]{\langle #1\rangle}
+\newcommand{\psis}{\psi^\star}
+\newcommand{\deq}{d_{\mathrm{eq}}}
+
+% ---------- draft tooling: gaps and todos ----------
+% \gap{short title}{explanation}: numbered, coloured, collected in \listofgaps.
+% Compile with \def\SHOWGAPS{1} (default in draft) to print the list at the end.
+\def\SHOWGAPS{1}
+\newcounter{gapitem}
+\newcommand{\gaplist}{}
+\makeatletter
+\newcommand{\gap}[2]{%
+  \refstepcounter{gapitem}%
+  \edef\@gapentry{\noexpand\item[G\thegapitem]\noexpand\textbf{\unexpanded{#1}}
+    (p.\noexpand~\thepage)}%
+  \expandafter\g@addto@macro\expandafter\gaplist\expandafter{\@gapentry}%
+  {\color{BrickRed}\textbf{[Gap~G\thegapitem: #1]}\ \textit{#2}}}
+\makeatother
+\newcommand{\listofgaps}{\begin{description}\gaplist\end{description}}
+\newcommand{\todoinline}[1]{{\color{blue}\textbf{[TODO: #1]}}}
+\newcommand{\new}[1]{{\color{OliveGreen}#1}}  % mark text that is new w.r.t. CCTA/ECC (optional)

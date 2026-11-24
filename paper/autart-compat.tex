@@ -1,0 +1,50 @@
+% =============================================================================
+%  autart-compat.tex -- stand-in for autart.cls when it is not available.
+%  Provides the frontmatter interface of autart (title, \thanks[..], \author[..],
+%  \ead, \address[..], keyword) on top of the article class, with a two-column
+%  layout of roughly Automatica's dimensions (17.4 cm text width, 0.6 cm gap).
+%  With the real autart.cls present this file is not loaded.
+% =============================================================================
+\usepackage[a4paper,textwidth=17.4cm,textheight=24.2cm,columnsep=0.6cm,
+  top=2.6cm]{geometry}
+\usepackage{environ}
+\usepackage{amsthm}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\makeatletter
+\def\BIBSTYLE{plainnat}
+\let\@fm@title\@empty
+\let\@fm@authors\@empty
+\let\@fm@addresses\@empty
+\let\@fm@thanks\@empty
+\renewcommand{\title}[1]{\gdef\@fm@title{#1}}
+\newcommand{\thanksref}[1]{\textsuperscript{$\star$}}
+\renewcommand{\thanks}[2][]{\gdef\@fm@thanks{\textsuperscript{$\star$}\,#2}}
+\renewcommand{\author}[2][]{%
+  \ifx\@fm@authors\@empty\else\g@addto@macro\@fm@authors{\unskip\ }\fi
+  \g@addto@macro\@fm@authors{#2\textsuperscript{\,#1}}}
+\newcommand{\ead}[1]{}
+\newcommand{\address}[2][]{%
+  \g@addto@macro\@fm@addresses{\par\noindent\textsuperscript{#1}\,#2}}
+\let\@fm@abstract\@empty
+\let\@fm@keywords\@empty
+\NewEnviron{keyword}{\global\let\@fm@keywords\BODY}
+\let\abstract\relax\let\endabstract\relax
+\NewEnviron{abstract}{\global\let\@fm@abstract\BODY}
+% frontmatter: first run the body (it only stores), then typeset the block
+\NewEnviron{frontmatter}{%
+  \setbox0=\vbox{\BODY}% all frontmatter macros store globally; discard the rest
+  \twocolumn[{%
+    \begin{center}
+      {\LARGE\bfseries \@fm@title\par}\vspace{3mm}
+      {\large \@fm@authors\par}\vspace{2mm}
+      {\footnotesize\itshape \@fm@addresses\par}
+    \end{center}
+    \noindent\rule{\linewidth}{0.4pt}\par\smallskip
+    \noindent{\small\textbf{Abstract.}\ \@fm@abstract\par}\medskip
+    \noindent{\small\textit{Key words:}\ \@fm@keywords\par}
+    \noindent\rule{\linewidth}{0.4pt}\par\vspace{5mm}}]%
+  \ifx\@fm@thanks\@empty\else
+    \begingroup\renewcommand\thefootnote{}\footnotetext{\@fm@thanks}\endgroup\fi}
+\makeatother
